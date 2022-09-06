@@ -30,10 +30,16 @@
         justify-content: center;
         align-items: center;
         background: #fff;
+        width: 100%;
+        padding: 10px;
       }
       form {
-        width: 100%;
+        width: 70%;
         padding: 20px;
+        min-width: 200px;
+      }
+      .prediction-div{
+        width: 70%;
       }
       fieldset {
         border: none;
@@ -46,12 +52,12 @@
         justify-content: space-between;
       }
       .personal-details >div >div {
-        display: flex;
+        display: block;
         align-items: center;
-        margin-bottom: 10px;
+        margin-bottom: 5px;
       }
       .personal-details >div, input, label {
-        width: 100%;
+        width: 80%;
       }
       label {
         padding: 0 5px;
@@ -62,7 +68,7 @@
         padding: 5px;
         vertical-align: middle;
       }
-      .checkbox {
+      checkbox {
         margin-bottom: 10px;
       }
       select {
@@ -96,19 +102,50 @@
       input[type=submit]:active {
         background:#82be28;
       }
+      .pred-text-0 {
+        background:#82be28;
+        color: white;
+        font-size: 1.5em;
+        font-weight: bold;
+        width: 60%;
+      }
+      .pred-text-1 {
+        background:#ff0000;
+        color: white;
+        font-size: 1.5em;
+        font-weight: bold;
+        width: 60%;
+      }
+      span {
+        display: block;
+      }
+      .col {
+          float: left;
+          width: 50%
+      }
+      .personal-details >div { 
+          padding-bottom: 8px;
+        }
 
       @media (min-width: 568px) {
-        .account-details >div, .personal-details >div {
+        .personal-details >div {
           width: 50%;
+          padding-bottom: 8px;
         }
         label {
           width: 40%;
+        }
+        input[type=submit] {
+          width: 50%;
         }
         input {
           width: 60%;
         }
         select {
           width: calc(60% + 16px);
+        }
+        .prediction-div{
+          width: 70%;
         }
       }
     </style>
@@ -117,58 +154,109 @@
     <div class="main-block">
       <div class="form-div">
         <form action="{{ url_for('predict')}}" method="post">
+          <h1>BootCamp UTEC - BID - 4Geeks </h1> 
           <h1>Stroke Prediction</h1> 
           <fieldset>
             <legend>
               <h3>Patient Details</h3>
             </legend>
             <div  class="personal-details">
-              <div>
-                 <div>
-                  <label>Gender*</label>  
-                  <select name='Gender' id='smoking_status' data-required="true" data-error-message="The smoking status is requires">
-                    <option value=""></option>
-                    <option value="0">Female</option>
-                    <option value="1">Male</option>
-                    <option value="2">Other</option> 
-                  </select>
-                </div>
-                <div><label>Age*</label><input type="text" placeholder="Age" name='age' id='age' data-required="true" data-error-message="Your age is required"></div>
-                <div><label>Hypertension*</label>
-                  <select name='hypertension' id='hypertension' data-required="true" data-error-message="hypertension is requires">
-                      <option value=""></option>
-                      <option value="0">No</option>
-                      <option value="1">Yes</option>
-                  </select>            
-              </div> 
-              <div><label>AVG Glucose Level*</label><input type="text" placeholder="AVG Glucose Level" name='avg_glucose_level' id='avg_glucose_level' data-required="true" data-error-message="AVG Glucose Level is requires"></div>       
-              <div><label>BMI*</label><input type="text" placeholder="Body Mass Index" name='bmi' id='bmi' data-required="true" data-error-message="The number of BMI (Body Mass Index) is requires"></div>
-              <div>
-                  <label>Smoking*</label>  
-                  <select name='smoking_status' id='smoking_status' data-required="true" data-error-message="The smoking status is requires">
-                    <option value=""></option>
-                    <option value="0">Unknown</option>
-                    <option value="1">Never Smoked</option>
-                    <option value="2">Smokes</option>
-                    <option value="3">Formerly Smoked</option> 
-                  </select>
-              </div> 
-              </div>
+              
+                      <div>
+                        <div >Gender*</div>  
+                        <select name='Gender' id='smoking_status' data-required="true" data-error-message="The smoking status is requires">
+                          <option value=""></option>
+                          <option value="0">Female</option>
+                          <option value="1">Male</option>
+                          <option value="2">Other</option> 
+                        </select>
+                      </div>
+                     
+                      <div>
+                        <div>Age*</div>
+                        <input type="text" placeholder="Age" name='age' id='age' data-required="true" data-error-message="Your age is required">
+                      </div>
+
+                      <div >      
+                        <div>Hypertension*</div>
+                        <select name='hypertension' id='hypertension' data-required="true" data-error-message="Hypertension is requires">
+                            <option value=""></option>
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>            
+                      </div>  
+
+                      <div>  
+                        <div>Heart Disease*</div>
+                        <select name='heart_disease' id='heart_disease' data-required="true" data-error-message="Heart disease is requires">
+                          <option value=""></option>
+                          <option value="0">No</option>
+                          <option value="1">Yes</option>
+                        </select>            
+                      </div>
+
+                      <div>
+                        <div>Ever Married*</div>  
+                        <select name='ever_married' id='ever_married' data-required="true" data-error-message="The ever married type is requires">
+                          <option value=""></option>
+                          <option value="0">No</option>
+                          <option value="1">Yes</option>
+                        </select>
+                      </div>    
+
+                      <div>
+                        <div>Working Type*</div>  
+                        <select name='work_type' id='work_type' data-required="true" data-error-message="The work type is requires">
+                        <option value=""></option>
+                        <option value="0">Private</option>
+                        <option value="1">Self-employed</option>
+                          <option value="2">children</option>
+                        <option value="3">Govt_job</option>
+                          <option value="4">Never_worked</option>
+                        </select>
+                      </div>
+
+                      <div>
+                        <div>Residence Type*</div>  
+                        <select name='Residence_type' id='Residence_type' data-required="true" data-error-message="The residence type is requires">
+                          <option value=""></option>
+                          <option value="0">Urban</option>
+                          <option value="1">Rural</option>
+                        </select>
+                      </div>
+
+                      <div><div>AVG Glucose Level*</div><input type="text" placeholder="AVG Glucose Level" name='avg_glucose_level' id='avg_glucose_level' data-required="true" data-error-message="AVG Glucose Level is requires"></div>      
+                      <div><div>BMI*</div><input type="text" placeholder="Body Mass Index" name='bmi' id='bmi' data-required="true" data-error-message="The number of BMI (Body Mass Index) is requires"></div>
+
+                      <div>
+                        <div>Smoking*</div>  
+                        <select name='smoking_status' id='smoking_status' data-required="true" data-error-message="The smoking status is requires">
+                          <option value=""></option>
+                          <option value="0">Unknown</option>
+                          <option value="1">Never Smoked</option>
+                          <option value="2">Smokes</option>
+                          <option value="3">Formerly Smoked</option>
+                        </select>
+                      </div>  
+     
             </div>
           </fieldset>
-          <input id="submit" type="submit" value="predict">
+          <div><input id="submit" type="submit" value="Predict"></div>
         </form>
-      </div>
-
-      <div class="div-prediction">
-        <fieldset>
-          <legend><h3>{{prediction_title}}</h3></legend>
-          <div>{{ prediction_text}}  </div>
-          <div>{{ prediction_values}}  </div>
-        </fieldset>
-
+       
         
       </div>
+      <div class="form-div">
+        <div class="prediction-div">
+          <fieldset>
+            <legend><h3>{{prediction_title}}</h3></legend>
+            <div><span>{{ prediction_values |safe}}</span>  </div>
+            <div class="pred-text-0">{{ prediction_text_0}}  </div>
+            <div class="pred-text-1">{{ prediction_text_1}}  </div>
+          </fieldset>  
+        </div>
+      </div>
+      
      
     </div> 
   </body>
