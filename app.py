@@ -48,8 +48,8 @@ def predict():
             data_patients["Gender"] = data_patients["Gender"].map({ 0:'Female', 1:'Male', 2:'Other'}) 
             data_patients["Heart Disease"] = data_patients["Heart Disease"].map({ 0:'No', 1:'Yes'}) 
             data_patients["Ever Married"] = data_patients["Ever Married"].map({ 0:'No', 1:'Yes'}) 
-            data_patients["Residence Type"] = data_patients["Residence Type"].map({'Urban': 0, 'Rural' : 1}) 
-            data_patients["Work Type"] = data_patients["Work Type"].map({'Private' : 0, 'Self-employed': 1, 'children': 2 , 'Govt_job':3, 'Never_worked':4})
+            data_patients["Residence Type"] = data_patients["Residence Type"].map({0:'Urban', 1:'Rural'}) 
+            data_patients["Work Type"] = data_patients["Work Type"].map({0:'Private', 1:'Self-employed', 2:'children', 3:'Govt_job', 4:'Never_worked'})
 
             pred_values = pred_values + " ".join( "<li>" + i + " : " + str(data_patients[i][0]) + " </li>" for i in label_features)
    
@@ -64,9 +64,9 @@ def predict():
             pred_html_0=""
 
             if output==1:
-                pred_html_1 = "The patient can suffer stroke in the future."
+                pred_html_1 = "The patient could suffer stroke in the future."
             else:
-                pred_html_0 = "The patient can NOT suffer stroke in the future."
+                pred_html_0 = "The patient is unlikely to have a stroke in the future."
             
             return render_template('index.html', prediction_text_1=pred_html_1, prediction_text_0=pred_html_0,prediction_title="Prediction", prediction_values=pred_values)
         else:
